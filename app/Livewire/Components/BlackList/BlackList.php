@@ -5,7 +5,7 @@ namespace App\Livewire\Components\BlackList;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
-use App\Models\Blacklist as BlackListBerns;
+use App\Models\Blacklist as BlacklistModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\UploadedFile;
 
@@ -34,7 +34,7 @@ class BlackList extends Component
 
     public function render()
     {
-        $query = BlacklistBerns::query();
+        $query = BlacklistModel::query();
 
         if ($this->searchFecha) {
             $query->whereDate('fecha', $this->searchFecha);
@@ -76,15 +76,15 @@ class BlackList extends Component
             $data['imagen'] = $this->imagen;
         }
 
-        BlacklistBerns::updateOrCreate(['id' => $this->entryId], $data);
+        BlacklistModel::updateOrCreate(['id' => $this->entryId], $data);
 
         $this->resetInputFields();
-        $this->dispatch('ordenStore'); // Emitir evento para cerrar modal
+        $this->dispatchBrowserEvent('ordenStore'); // Emitir evento para cerrar modal
     }
 
     public function edit($id)
     {
-        $entry = BlacklistBerns::findOrFail($id);
+        $entry = BlacklistModel::findOrFail($id);
         if ($entry->user_id !== Auth::id()) {
             abort(403, 'Unauthorized action.');
         }
@@ -103,7 +103,7 @@ class BlackList extends Component
 
     public function delete($id)
     {
-        $entry = BlacklistBerns::findOrFail($id);
+        $entry = BlacklistModel::findOrFail($id);
         if ($entry->user_id !== Auth::id()) {
             abort(403, 'Unauthorized action.');
         }
@@ -132,10 +132,6 @@ class BlackList extends Component
 
     public function resetFilters()
     {
-        $this->searchFecha = '';
-        $this->searchExchange = '';
-        $this->searchPais = '';
+        $this->reset(['searchFecha', 'searchExchange', 'searchPais']);
     }
 }
-
-

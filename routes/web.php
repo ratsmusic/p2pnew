@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('orders');
     Route::get('/payments', [PaymentController::class, 'index'])->name('payments');
     Route::get('/prices', [PriceController::class, 'index'])->name('prices');
+    Route::view('/black-list', 'black.index')->name('black');
     // profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

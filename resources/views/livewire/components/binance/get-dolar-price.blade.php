@@ -1,36 +1,19 @@
 <div>
     @if($fiat == 'ARS')
-    <div class="row mt-2" >
-        <div class="col-sm-4" >
-            <div class="card">
-                <div class="card-header p-3 pt-2"></div>
-                <div class="text-center">
-                    <div class="text-2xl text-bolder" style="color: black;">DOLAR OFICIAL</div>
-                    <div class="" style="color: black;">{{$official}} {{$fiat}}</div>
-                </div>
-                <div class="card-footer p-3"></div>
-            </div>
+    <div class="grid grid-cols-responsive-fit sm:grid-cols-custom-fit gap-4 mb-6">
+        <div class="bg-secondaryBg p-4 rounded-lg text-center flex flex-col items-center justify-between">
+            <div class="font-bold text-xl text-[#26922A]">Dolar oficial</div>
+            <div class="mt-2 font-semibold">935.00 ARS</div>
         </div>
-        <div class="col-sm-4" >
-            <div class="card">
-                <div class="card-header p-3 pt-2"></div>
-                <div class="text-center">
-                    <div class="text-2xl text-bolder" style="color: black;">DOLAR MEP</div>
-                    <div class="" style="color: black;">{{$mep}} {{$fiat}}</div>
-                </div>
-                <div class="card-footer p-3"></div>
-            </div>
+        <div class="bg-secondaryBg p-4 rounded-lg text-center flex flex-col items-center justify-between">
+            <div class="font-bold text-xl text-[#26922A]">Dolar MEP</div>
+            <div class="mt-2 font-semibold">1206.00 ARS</div>
         </div>
-        <div class="col-sm-4" >
-            <div class="card">
-                <div class="card-header p-3 pt-2"></div>
-                <div class="text-center">
-                    <div class="text-2xl text-bolder" style="color: black;">DOLAR BLUE</div>
-                    <div class="" style="color: black;">{{$blue}} {{$fiat}}</div>
-                </div>
-                <div class="card-footer p-3"></div>
-            </div>
+        <div class="bg-secondaryBg p-4 rounded-lg text-center flex flex-col items-center justify-between">
+            <div class="font-bold text-xl text-[#26922A]">Dolar BLUE</div>
+            <div class="mt-2 font-semibold">1210.00 ARS</div>
         </div>
     </div>
+
     @endif
 </div>

@@ -1,0 +1,1 @@
+@livewire('components.black-list.black-list')
