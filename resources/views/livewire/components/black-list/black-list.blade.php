@@ -92,143 +92,145 @@
             </div>
     
             <!-- Modal -->
-            <div wire:ignore.self class="fixed inset-0 z-50 overflow-y-auto hidden" id="modalCrear" aria-labelledby="modalCrearLabel" role="dialog" aria-modal="true">
-                <div class="flex items-center justify-center min-h-screen px-4 text-center">
-                    <div class="fixed inset-0 transition-opacity">
-                        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-                    </div>
-    
-                    <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="document">
-                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                            <div class="sm:flex sm:items-start">
-                                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modalCrearLabel">
-                                        Crear/Editar Entrada en la Lista Negra
-                                    </h3>
-                                    <div class="mt-2">
-                                        <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
-                                            <div class="col-span-1">
-                                                <div class="form-group">
-                                                    <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
-                                                    <input type="text" class="form-input mt-1 block w-full @error('nombre') is-invalid @enderror" id="nombre" wire:model="nombre">
-                                                    @error('nombre') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="sexo" class="block text-sm font-medium text-gray-700">Sexo</label>
-                                                    <select class="form-select mt-1 block w-full @error('sexo') is-invalid @enderror" id="sexo" wire:model="sexo">
-                                                        <option value="">Seleccione</option>
-                                                        <option value="Masculino">Masculino</option>
-                                                        <option value="Femenino">Femenino</option>
-                                                        <option value="Otro">Otro</option>
-                                                    </select>
-                                                    @error('sexo') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="nickexchange" class="block text-sm font-medium text-gray-700">Nick Exchange</label>
-                                                    <input type="text" class="form-input mt-1 block w-full @error('nickexchange') is-invalid @enderror" id="nickexchange" wire:model="nickexchange">
-                                                    @error('nickexchange') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="fecha" class="block text-sm font-medium text-gray-700">Fecha</label>
-                                                    <input type="date" class="form-input mt-1 block w-full @error('fecha') is-invalid @enderror" id="fecha" wire:model="fecha">
-                                                    @error('fecha') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="pais" class="block text-sm font-medium text-gray-700">País</label>
-                                                    <select class="form-select mt-1 block w-full @error('pais') is-invalid @enderror" id="pais" wire:model="pais">
-                                                        <option value="">Seleccione</option>
-                                                        @foreach($paises as $pais)
-                                                            <option value="{{ $pais }}">{{ $pais }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('pais') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="forma_pago" class="block text-sm font-medium text-gray-700">Forma de Pago</label>
-                                                    <input type="text" class="form-input mt-1 block w-full @error('forma_pago') is-invalid @enderror" id="forma_pago" wire:model="forma_pago">
-                                                    @error('forma_pago') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="imagen" class="block text-sm font-medium text-gray-700">Imagen</label>
-                                                    <input type="file" class="form-input mt-1 block w-full @error('imagen') is-invalid @enderror" id="imagen" wire:model="imagen">
-                                                    @error('imagen') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                                                    @if ($imagen instanceof \Livewire\TemporaryUploadedFile)
-                                                        <img src="{{ $imagen->temporaryUrl() }}" alt="Preview" width="100">
-                                                    @elseif (is_string($imagen))
-                                                        <img src="{{ Storage::url($imagen) }}" alt="Imagen Actual" width="100">
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            <div class="col-span-1">
-                                                <div class="form-group">
-                                                    <label for="numero_referencia" class="block text-sm font-medium text-gray-700">Número de Referencia</label>
-                                                    <input type="text" class="form-input mt-1 block w-full @error('numero_referencia') is-invalid @enderror" id="numero_referencia" wire:model="numero_referencia">
-                                                    @error('numero_referencia') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="numero_orden_exchange" class="block text-sm font-medium text-gray-700">Número de Orden Exchange</label>
-                                                    <input type="text" class="form-input mt-1 block w-full @error('numero_orden_exchange') is-invalid @enderror" id="numero_orden_exchange" wire:model="numero_orden_exchange">
-                                                    @error('numero_orden_exchange') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
-                                                    <textarea class="form-input mt-1 block w-full @error('descripcion') is-invalid @enderror" id="descripcion" wire:model="descripcion"></textarea>
-                                                    @error('descripcion') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+<div wire:ignore.self class="fixed z-10 inset-0 overflow-y-auto hidden" id="modalCrear" aria-labelledby="modalCrearLabel" role="dialog" aria-modal="true">
+    <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 transition-opacity">
+            <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+        <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+            <div class="sm:flex sm:items-start">
+                <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                    <svg class="h-6 w-6 text-green-600" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modalCrearLabel">
+                        Crear/Editar Entrada en la Lista Negra
+                    </h3>
+                    <div class="mt-2">
+                        <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+                            <div class="col-span-1">
+                                <div class="form-group">
+                                    <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
+                                    <input type="text" class="form-input mt-1 block w-full @error('nombre') is-invalid @enderror" id="nombre" wire:model="nombre">
+                                    @error('nombre') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="sexo" class="block text-sm font-medium text-gray-700">Sexo</label>
+                                    <select class="form-select mt-1 block w-full @error('sexo') is-invalid @enderror" id="sexo" wire:model="sexo">
+                                        <option value="">Seleccione</option>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Femenino">Femenino</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
+                                    @error('sexo') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="nickexchange" class="block text-sm font-medium text-gray-700">Nick Exchange</label>
+                                    <input type="text" class="form-input mt-1 block w-full @error('nickexchange') is-invalid @enderror" id="nickexchange" wire:model="nickexchange">
+                                    @error('nickexchange') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="fecha" class="block text-sm font-medium text-gray-700">Fecha</label>
+                                    <input type="date" class="form-input mt-1 block w-full @error('fecha') is-invalid @enderror" id="fecha" wire:model="fecha">
+                                    @error('fecha') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="pais" class="block text-sm font-medium text-gray-700">País</label>
+                                    <select class="form-select mt-1 block w-full @error('pais') is-invalid @enderror" id="pais" wire:model="pais">
+                                        <option value="">Seleccione</option>
+                                        @foreach($paises as $pais)
+                                            <option value="{{ $pais }}">{{ $pais }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('pais') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="forma_pago" class="block text-sm font-medium text-gray-700">Forma de Pago</label>
+                                    <input type="text" class="form-input mt-1 block w-full @error('forma_pago') is-invalid @enderror" id="forma_pago" wire:model="forma_pago">
+                                    @error('forma_pago') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="imagen" class="block text-sm font-medium text-gray-700">Imagen</label>
+                                    <input type="file" class="form-input mt-1 block w-full @error('imagen') is-invalid @enderror" id="imagen" wire:model="imagen">
+                                    @error('imagen') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                    @if ($imagen instanceof \Livewire\TemporaryUploadedFile)
+                                        <img src="{{ $imagen->temporaryUrl() }}" alt="Preview" width="100">
+                                    @elseif (is_string($imagen))
+                                        <img src="{{ Storage::url($imagen) }}" alt="Imagen Actual" width="100">
+                                    @endif
                                 </div>
                             </div>
-                        </div>
-                        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                            <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm" wire:click="store">
-                                Guardar
-                            </button>
-                            <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm" data-bs-dismiss="modal">
-                                Cancelar
-                            </button>
+                            <div class="col-span-1">
+                                <div class="form-group">
+                                    <label for="numero_referencia" class="block text-sm font-medium text-gray-700">Número de Referencia</label>
+                                    <input type="text" class="form-input mt-1 block w-full @error('numero_referencia') is-invalid @enderror" id="numero_referencia" wire:model="numero_referencia">
+                                    @error('numero_referencia') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="numero_orden_exchange" class="block text-sm font-medium text-gray-700">Número de Orden Exchange</label>
+                                    <input type="text" class="form-input mt-1 block w-full @error('numero_orden_exchange') is-invalid @enderror" id="numero_orden_exchange" wire:model="numero_orden_exchange">
+                                    @error('numero_orden_exchange') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
+                                    <textarea class="form-input mt-1 block w-full @error('descripcion') is-invalid @enderror" id="descripcion" wire:model="descripcion"></textarea>
+                                    @error('descripcion') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Fin del Modal -->
+            <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                    <button type="button"
+                        class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5" wire:click="store">
+                        Guardar
+                    </button>
+                </span>
+                <span class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
+                    <button type="button"
+                        class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5" onclick="closeModal()">
+                        Cancelar
+                    </button>
+                </span>
+            </div>
         </div>
-    
-        <script>
-            window.addEventListener('ordenStore', () => {
-                var myModalEl = document.getElementById('modalCrear');
-                if (myModalEl) {
-                    myModalEl.classList.add('hidden');
-                }
-                limpiarModal(); // Limpia los campos del modal
-            });
-    
-            function limpiarModal() {
-                var modalForm = document.getElementById('modalCrear').querySelector('form');
-                if (modalForm) {
-                    modalForm.reset(); // Resetea el formulario del modal
-                }
-            }
-    
-            document.addEventListener("livewire:load", () => {
-                Livewire.on('ordenCreada', () => {
-                    limpiarModal(); // Limpia los campos del modal al crear una orden
-                });
-            });
-    
-            document.querySelectorAll('[data-bs-toggle="modal"]').forEach(el => {
-                el.addEventListener('click', () => {
-                    document.getElementById(el.getAttribute('data-bs-target').substring(1)).classList.remove('hidden');
-                });
-            });
-    
-            document.querySelectorAll('[data-bs-dismiss="modal"]').forEach(el => {
-                el.addEventListener('click', () => {
-                    el.closest('.modal').classList.add('hidden');
-                });
-            });
-        </script>
+    </div>
+</div>
+<!-- Fin del Modal -->
+
+<script>
+    function openModal() {
+        document.getElementById('modalCrear').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('modalCrear').classList.add('hidden');
+    }
+
+    window.addEventListener('ordenStore', () => {
+        closeModal();
+        limpiarModal(); // Limpia los campos del modal
+    });
+
+    function limpiarModal() {
+        var modalForm = document.getElementById('modalCrear').querySelector('form');
+        if (modalForm) {
+            modalForm.reset(); // Resetea el formulario del modal
+        }
+    }
+
+    document.addEventListener("livewire:load", () => {
+        Livewire.on('ordenCreada', () => {
+            limpiarModal(); // Limpia los campos del modal al crear una orden
+        });
+    });
+</script>
+
     </x-app-layout>
     
 </div>
